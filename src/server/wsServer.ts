@@ -2,6 +2,7 @@ import ws from "ws";
 import { applyWSSHandler } from "@trpc/server/adapters/ws";
 import { appRouter } from "./router";
 import { createContext } from "./router/context";
+import { IncomingMessage } from "http";
 
 const wss = new ws.Server({
   port: 3001,
@@ -9,7 +10,8 @@ const wss = new ws.Server({
 
 const handler = applyWSSHandler({ wss, router: appRouter, createContext });
 
-wss.on("connection", () => {
+wss.on("connection", (ws: WebSocket, message: IncomingMessage) => {
+  console.log(message.headers.cookie);
   console.log(`Got a connection ${wss.clients.size}`);
   wss.once("close", () => {
     console.log(`Closed connection ${wss.clients.size}`);

@@ -47,6 +47,11 @@ function RoomPage() {
     "room.send-message",
   ]);
 
+  const x = trpc.useQuery([
+    "auth.getSession",
+  ])
+  console.log(x)
+
   trpc.useSubscription(
     [
       "room.onSendMessage",
@@ -84,7 +89,6 @@ function RoomPage() {
       <form
         className="flex"
         onSubmit={(e) => {
-          console.log("submity");
           e.preventDefault();
 
           sendMessageMutation({
