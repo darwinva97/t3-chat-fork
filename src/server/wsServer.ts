@@ -42,6 +42,8 @@ wss.on("connection", async (ws: WebSocket, message: IncomingMessage) => {
     },
   }).then((res) => res.json());
 
+  console.log(session, "<= session")
+
   if (!session) {
     return ws.close();
   }

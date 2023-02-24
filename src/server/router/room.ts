@@ -10,18 +10,17 @@ import * as trpc from "@trpc/server";
 import { TRPCError } from "@trpc/server";
 
 export const roomRouter = createRouter()
-  .middleware(async ({ ctx, next }) => {
-    // Any queries or mutations after this middleware will
-    // raise an error unless there is a current session
-    if (!ctx.session) {
-      throw new TRPCError({ code: "UNAUTHORIZED" });
-    }
-    return next();
-  })
+  // .middleware(async ({ ctx, next }) => {
+  //   // Any queries or mutations after this middleware will
+  //   // raise an error unless there is a current session
+  //   if (!ctx.session) {
+  //     throw new TRPCError({ code: "UNAUTHORIZED" });
+  //   }
+  //   return next();
+  // })
   .mutation("send-message", {
     input: sendMessageSchema,
     resolve({ ctx, input }) {
-      console.log(ctx.session, "ctx.session");
       const message: Message = {
         id: randomUUID(),
         ...input,

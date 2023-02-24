@@ -47,11 +47,6 @@ function RoomPage() {
     "room.send-message",
   ]);
 
-  const x = trpc.useQuery([
-    "auth.getSession",
-  ])
-  console.log(x)
-
   trpc.useSubscription(
     [
       "room.onSendMessage",
