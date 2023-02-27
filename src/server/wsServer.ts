@@ -35,18 +35,6 @@ if (isDev) {
 const handler = applyWSSHandler({ wss, router: appRouter, createContext });
 
 wss.on("connection", async (ws: WebSocket, message: IncomingMessage) => {
-  const session = await fetch(env.NEXTAUTH_URL + "/api/session", {
-    headers: {
-      "Content-Type": "application/json",
-      cookie: String(message.headers.cookie),
-    },
-  }).then((res) => res.json());
-
-  console.log(session, "<= session")
-
-  if (!session) {
-    return ws.close();
-  }
 
   console.log(`Got a connection ${wss.clients.size}`);
 

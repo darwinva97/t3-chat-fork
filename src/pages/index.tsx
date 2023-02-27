@@ -3,11 +3,14 @@ import Head from "next/head";
 import { trpc } from "../utils/trpc";
 import { customAlphabet } from "nanoid";
 import { useRouter } from "next/router";
+import x, { useSession } from "next-auth/react";
 
 const nanoid = customAlphabet("abcdefghijklmnopqrstuvqxyz0123456789", 4);
 
 const Home: NextPage = () => {
   const router = useRouter();
+
+  const session = useSession();
 
   function createRoom() {
     const roomId = nanoid();

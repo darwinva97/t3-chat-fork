@@ -89,6 +89,7 @@ function RoomPage() {
           sendMessageMutation({
             roomId,
             message,
+            wsToken: session.wsToken!,
           });
 
           setMessage("");

@@ -8,9 +8,10 @@ import {
 import { Events } from "../../constants/events";
 import * as trpc from "@trpc/server";
 import { TRPCError } from "@trpc/server";
+import { verifyWsToken } from "../../utils/wsToken";
 
 export const roomRouter = createRouter()
-  // .middleware(async ({ ctx, next }) => {
+  // .middleware(async ({ ctx, next, rawInput, ...rest }) => {
   //   // Any queries or mutations after this middleware will
   //   // raise an error unless there is a current session
   //   if (!ctx.session) {
@@ -21,6 +22,8 @@ export const roomRouter = createRouter()
   .mutation("send-message", {
     input: sendMessageSchema,
     resolve({ ctx, input }) {
+      const { wsToken } = input;
+      const user = verifyWsToken(wsToken);
       const message: Message = {
         id: randomUUID(),
         ...input,

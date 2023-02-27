@@ -1,6 +1,7 @@
 const { z } = require("zod");
 
 const envSchema = z.object({
+  WS_JWT_SECRET: z.string(),
   DATABASE_URL: z.string().url(),
   NODE_ENV: z.enum(["development", "test", "production"]),
   NEXTAUTH_SECRET: z.string(),

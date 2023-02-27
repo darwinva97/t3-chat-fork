@@ -3,6 +3,7 @@ import z from "zod";
 export const sendMessageSchema = z.object({
   roomId: z.string(),
   message: z.string(),
+  wsToken: z.string()
 });
 
 const messageSchema = z.object({
